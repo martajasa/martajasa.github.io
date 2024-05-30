@@ -57,16 +57,8 @@
                     </div>
 
                     <div class="bl-content">
-                        <h2>Experiment</h2>
-
-                        <p>This responsive layout is based on an initial grid of
-                            four boxes. Once a box is clicked, it gets resized to
-                            fullscreen and the other boxes scale down and fade out. In
-                            the work section we experiment with another transition
-                            which is to show a panel by making it appear from the
-                            bottom while scaling the current one down. To see it in
-                            action, open the work section and click on one of the
-                            portfolio items and navigate through them.</p>
+                        <h2>Blog</h2>  
+                        <div id="blog-feed"></div> 
                     </div><span class="bl-icon bl-icon-close"></span>
                 </section>
 
@@ -292,6 +284,23 @@
         $(function() {
             Boxlayout.init();
         });
+    </script>
+    <script> 
+        const apiKey = 'AIzaSyCFMsYfHMYUodRRKU5SN9es8wlWXu2g7kY'; 
+        const blogId = '818162747964194013'; 
+        fetch(`https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`) 
+        .then(response => response.json()) 
+        .then(data => { 
+        const feedContainer = document.getElementById('blog-feed'); 
+        data.items.forEach(item => { 
+        const title = item.title; 
+        const link = item.url; 
+        const postLink = document.createElement('a'); 
+        postLink.href = link; 
+        postLink.textContent = title; 
+        feedContainer.appendChild(postLink); 
+        }); 
+        }); 
     </script>
 </body>
 
