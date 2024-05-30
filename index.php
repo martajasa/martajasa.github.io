@@ -9,7 +9,7 @@
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="libs/armin/armin.min.css">
     <link rel="stylesheet" href="libs/fonts/foundation-icons/foundation-icons.css">
-    <title>Hello, world!</title>
+    <title>Hello, Armin!</title>
 </head>
 
 <body>
