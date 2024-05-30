@@ -287,14 +287,21 @@
     </script>
     <script> 
 
-        $.ajax("https://www.googleapis.com/blogger/v3/blogs/818162747964194013/posts?callback=handleResponse&key=AIzaSyBPNSujpoaZ_vKiI3f3XleFZYcufm8eIrs")
-        function handleResponse(response) {
-        //var post_number = Object.keys(response.items).length; //number of posts
-        for (i = 0; i < response.items.length; i++) {
-            var titleHtml = '<div id="post' + (i + 1) + '" class="post"><p>' + response.items[i].title + '</p></div>';
-            $('#blog-feed').append(titleHtml);
-        }
-        }
+        const apiKey = 'AIzaSyCFMsYfHMYUodRRKU5SN9es8wlWXu2g7kY'; 
+        const blogId = '818162747964194013'; 
+        fetch(`https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`) 
+        .then(response => response.json()) 
+        .then(data => { 
+        const feedContainer = document.getElementById('blog-feed'); 
+        data.items.forEach(item => { 
+        const title = item.title; 
+        const link = item.url; 
+        const postLink = document.createElement('a'); 
+        postLink.href = link; 
+        postLink.textContent = title; 
+        feedContainer.appendChild(postLink); 
+        }); 
+        });
 
     </script>
 </body>
