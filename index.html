@@ -293,13 +293,17 @@
         .then(response => response.json()) 
         .then(data => { 
         const feedContainer = document.getElementById('blog-feed'); 
+        const feedPosting = document.getElementById('postingan')
         data.items.forEach(item => { 
         const title = item.title; 
         const link = item.url; 
+        const paragraph = item.post;
         const postLink = document.createElement('a'); 
+        const posting = document.createElement('p');
         postLink.href = link; 
         postLink.textContent = title; 
         feedContainer.appendChild(postLink); 
+        feedContainer.appendChild(posting);
         }); 
         });
 
