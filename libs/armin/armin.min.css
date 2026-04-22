@@ -317,7 +317,7 @@ a:hover {
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
-    line-height: 1;
+    line-height: 0.5;
     cursor: pointer;
     -webkit-font-smoothing: antialiased;
 }
