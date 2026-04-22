@@ -353,6 +353,7 @@ a:hover {
     z-index: 100;
     opacity: 0;
     pointer-events: none;
+    color:red;
 }
 
 .bl-icon-close:before {
