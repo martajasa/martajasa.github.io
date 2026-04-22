@@ -271,6 +271,7 @@ a:hover {
     letter-spacing: 3px;
     font-weight: 800;
     text-transform: uppercase;
+    color: #ffffff;
     opacity: 55%;
     animation: fadeIn 5s ease-in-out;
     -webkit-animation: fadeIn 5s ease-in-out;
@@ -768,7 +769,7 @@ section.bl-expand .bl-icon-close {
     }
 
     .bl-box h1 {
-        font-size: 8vw;
+        font-size: 12vw;
         letter-spacing: 2px;
     }
 
