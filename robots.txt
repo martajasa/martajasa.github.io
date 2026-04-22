@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /libs/
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://martajasa.github.io/sitemap.xml
