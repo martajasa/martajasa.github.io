@@ -1,0 +1,72 @@
+/* Blog Feed Card Styles — extracted from inline JS in index.html */
+
+.blog-feed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.blog-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eeeeee;
+    padding: 0;
+}
+
+.blog-card:hover {
+    background-color: #fafafa;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.blog-card__thumbnail {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.blog-card__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card__body {
+    padding: 15px;
+}
+
+.blog-card__title {
+    margin: 0 0 10px 0;
+    color: #808080;
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.blog-card__description {
+    margin: 0 0 12px 0;
+    color: #808080;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.blog-card__link {
+    display: inline-block;
+    color: #808080;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.blog-feed-empty {
+    color: #808080;
+    padding: 20px;
+    text-align: center;
+}

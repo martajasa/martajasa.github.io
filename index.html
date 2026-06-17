@@ -19,6 +19,7 @@
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="libs/armin/armin.min.css">
     <link rel="stylesheet" href="libs/fonts/foundation-icons/foundation-icons.css">
+    <link rel="stylesheet" href="css/blog-feed.css">
     <title>Hello, Armin!</title>
 </head>
 
@@ -144,37 +145,7 @@
                             professional design, optimal user experience, and technical excellence.</p>
 
                         <ul id="bl-work-items">
-                            <li data-panel="panel-1">
-                                <a href="#"><img src="images/1.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-2">
-                                <a href="#"><img src="images/2.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-3">
-                                <a href="#"><img src="images/3.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-4">
-                                <a href="#"><img src="images/4.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-5">
-                                <a href="#"><img src="images/5.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-6">
-                                <a href="#"><img src="images/6.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-7">
-                                <a href="#"><img src="images/7.jpg"></a>
-                            </li>
-
-                            <li data-panel="panel-8">
-                                <a href="#"><img src="images/8.png"></a>
-                            </li>
+                            <!-- Populated by js/portfolio.js -->
                         </ul>
 
                         <p>Illustrations by <a href="http://dribbble.com/isaac317/click">Isaac
@@ -217,108 +188,7 @@
                 </section><!-- Panel items for the works -->
 
                 <div class="bl-panel-items" id="bl-panel-work-items">
-                    <div data-panel="panel-1">
-                        <div>
-                            <img src="images/1.jpg">
-
-                            <h3>E-Commerce Platform</h3>
-
-                            <p>A fully-responsive e-commerce platform built with React and Laravel, featuring advanced
-                                product filtering, secure payment integration, and optimized checkout experience.
-                                Implemented real-time inventory management and user-centric dashboard for enhanced
-                                shopping experience.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-2">
-                        <div>
-                            <img src="images/2.jpg">
-
-                            <h3>Digital Product Management System</h3>
-
-                            <p>Developed a comprehensive digital product management system with MySQL database design,
-                                featuring advanced analytics, user role management, and automated workflows. The system
-                                streamlines product lifecycle management with intuitive interfaces and reporting
-                                capabilities.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-3">
-                        <div>
-                            <img src="images/3.jpg">
-
-                            <h3>Responsive Landing Page</h3>
-
-                            <p>Created high-converting landing pages optimized for mobile and desktop devices.
-                                Implemented SEO best practices, smooth animations, and conversion tracking with
-                                compelling call-to-action elements that drive user engagement and business results.</p>
-                            small batch ethnic master cleanse. Pug chillwave etsy,
-                            scenester meh occupy blue bottle tousled blog tonx
-                            pinterest selvage mixtape swag cosby sweater. Synth
-                            tousled direct trade, hella Austin craft beer ugh
-                            chambray.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-4">
-                        <div>
-                            <img src="images/4.jpg">
-
-                            <h3>Real-Time Data Analytics Dashboard</h3>
-
-                            <p>Built a comprehensive analytics dashboard with real-time data visualization using React
-                                and D3.js. Features include customizable widgets, export functionality, and role-based
-                                access control for data-driven decision making.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-5">
-                        <div>
-                            <img src="images/5.jpg">
-
-                            <h3>AI-Powered Content Generator</h3>
-
-                            <p>Developed an intelligent content generation tool leveraging AI technologies for automatic
-                                content creation, optimization, and SEO enhancement. Integrated with multiple platforms
-                                for seamless workflow automation and improved productivity.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-6">
-                        <div>
-                            <img src="images/6.jpg">
-
-                            <h3>Mobile App UI/UX Design</h3>
-
-                            <p>Designed and developed responsive mobile application interfaces focused on user
-                                experience and accessibility. Implemented intuitive navigation patterns, gesture
-                                controls, and adaptive layouts for optimal performance across all device sizes.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-7">
-                        <div>
-                            <img src="images/7.jpg">
-
-                            <h3>WordPress Theme Development</h3>
-
-                            <p>Created custom WordPress themes with advanced customization options, performance
-                                optimization, and SEO features. Integrated with popular plugins and implemented
-                                responsive design for excellent user experience across all platforms.</p>
-                        </div>
-                    </div>
-
-                    <div data-panel="panel-8">
-                        <div>
-                            <img src="images/8.png">
-
-                            <h3>Business Web Solution Suite</h3>
-
-                            <p>Developed a comprehensive web solution suite combining CMS, e-commerce, and marketing
-                                automation tools. Delivered scalable architecture with cloud integration, advanced
-                                security features, and comprehensive analytics reporting.</p>
-                        </div>
-                    </div>
+                    <!-- Panels populated by js/portfolio.js -->
 
                     <nav>
                         <span class="bl-next-work" style="margin: 0 !important;"> Next Project</span>
@@ -329,100 +199,34 @@
         </div>
     </div><!-- /container -->
 
-    <!-- Optional JavaScript; choose one of the two! -->
-    <script src="libs/armin//jquery.min.js"></script>
+    <!-- Shared JS utilities -->
+    <script src="libs/armin/jquery.min.js"></script>
     <script src="libs/armin/armin.min.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/blog-feed.js"></script>
     <script>
+        var portfolioData = [
+            { panel: 'panel-1', image: 'images/1.jpg', title: 'E-Commerce Platform', description: 'A fully-responsive e-commerce platform built with React and Laravel, featuring advanced product filtering, secure payment integration, and optimized checkout experience. Implemented real-time inventory management and user-centric dashboard for enhanced shopping experience.' },
+            { panel: 'panel-2', image: 'images/2.jpg', title: 'Digital Product Management System', description: 'Developed a comprehensive digital product management system with MySQL database design, featuring advanced analytics, user role management, and automated workflows. The system streamlines product lifecycle management with intuitive interfaces and reporting capabilities.' },
+            { panel: 'panel-3', image: 'images/3.jpg', title: 'Responsive Landing Page', description: 'Created high-converting landing pages optimized for mobile and desktop devices. Implemented SEO best practices, smooth animations, and conversion tracking with compelling call-to-action elements that drive user engagement and business results.' },
+            { panel: 'panel-4', image: 'images/4.jpg', title: 'Real-Time Data Analytics Dashboard', description: 'Built a comprehensive analytics dashboard with real-time data visualization using React and D3.js. Features include customizable widgets, export functionality, and role-based access control for data-driven decision making.' },
+            { panel: 'panel-5', image: 'images/5.jpg', title: 'AI-Powered Content Generator', description: 'Developed an intelligent content generation tool leveraging AI technologies for automatic content creation, optimization, and SEO enhancement. Integrated with multiple platforms for seamless workflow automation and improved productivity.' },
+            { panel: 'panel-6', image: 'images/6.jpg', title: 'Mobile App UI/UX Design', description: 'Designed and developed responsive mobile application interfaces focused on user experience and accessibility. Implemented intuitive navigation patterns, gesture controls, and adaptive layouts for optimal performance across all device sizes.' },
+            { panel: 'panel-7', image: 'images/7.jpg', title: 'WordPress Theme Development', description: 'Created custom WordPress themes with advanced customization options, performance optimization, and SEO features. Integrated with popular plugins and implemented responsive design for excellent user experience across all platforms.' },
+            { panel: 'panel-8', image: 'images/8.png', title: 'Business Web Solution Suite', description: 'Developed a comprehensive web solution suite combining CMS, e-commerce, and marketing automation tools. Delivered scalable architecture with cloud integration, advanced security features, and comprehensive analytics reporting.' }
+        ];
+
         $(function () {
+            Portfolio.renderWorkItems('bl-work-items', portfolioData);
+            Portfolio.renderPanelItems('bl-panel-work-items', portfolioData);
             Boxlayout.init();
         });
-    </script>
-    <script>
 
-        const apiKey = 'AIzaSyCFMsYfHMYUodRRKU5SN9es8wlWXu2g7kY';
-        const blogId = '818162747964194013';
-        fetch(`https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}&maxResults=10`)
-            .then(response => response.json())
-            .then(data => {
-                const feedContainer = document.getElementById('blog-feed');
-                feedContainer.style.display = 'grid';
-                feedContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
-                feedContainer.style.gap = '20px';
-                feedContainer.style.marginTop = '20px';
-
-                if (data.items && data.items.length > 0) {
-                    data.items.forEach((item, index) => {
-                        const title = item.title;
-                        const link = item.url;
-
-                        // Extract first image from content for thumbnail
-                        let thumbnail = '';
-                        let description = '';
-                        if (item.content) {
-                            const imgRegex = /<img[^>]+src="([^">]+)"/;
-                            const imgMatch = item.content.match(imgRegex);
-                            if (imgMatch) {
-                                thumbnail = imgMatch[1];
-                            }
-
-                            // Extract text for description (remove HTML tags and limit length)
-                            const tempDiv = document.createElement('div');
-                            tempDiv.innerHTML = item.content;
-                            description = tempDiv.textContent || tempDiv.innerText || '';
-                            description = description.substring(0, 120) + (description.length > 120 ? '...' : '');
-                        }
-
-                        // Create article card
-                        const articleCard = document.createElement('article');
-                        articleCard.style.backgroundColor = '#ffffff';
-                        articleCard.style.borderRadius = '8px';
-                        articleCard.style.overflow = 'hidden';
-                        articleCard.style.transition = 'all 0.3s ease';
-                        articleCard.style.cursor = 'pointer';
-                        articleCard.style.border = '1px solid #eeeeee';
-                        articleCard.style.padding = '0px';
-
-                        articleCard.onmouseover = function () {
-                            this.style.backgroundColor = '#fafafa';
-                            this.style.transform = 'translateY(-5px)';
-                            this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.08)';
-                        };
-
-                        articleCard.onmouseout = function () {
-                            this.style.backgroundColor = '#ffffff';
-                            this.style.transform = 'translateY(0)';
-                            this.style.boxShadow = 'none';
-                        };
-
-                        let cardHTML = '';
-
-                        // Add thumbnail if available
-                        if (thumbnail) {
-                            cardHTML += `<div style="width: 100%; height: 180px; overflow: hidden; background: #f8f8f8;">
-                                <img src="${thumbnail}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
-                            </div>`;
-                        }
-
-                        cardHTML += `
-                            <div style="padding: 15px;">
-                                <h4 style="margin: 0 0 10px 0; color: #808080; font-size: 1.1em; font-weight: 600; line-height: 1.4;">${title}</h4>
-                                <p style="margin: 0 0 12px 0; color: #808080; font-size: 0.95em; line-height: 1.5;">${description}</p>
-                                <a href="${link}" target="_blank" style="display: inline-block; color: #808080; text-decoration: none; font-size: 0.85em; font-weight: 600; padding-top: 5px;">Read Article →</a>
-                            </div>
-                        `;
-
-                        articleCard.innerHTML = cardHTML;
-                        feedContainer.appendChild(articleCard);
-                    });
-                } else {
-                    feedContainer.innerHTML = '<p style="color: #808080; padding: 20px; text-align: center;">No blog posts available at this time.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching blog:', error);
-                document.getElementById('blog-feed').innerHTML = '<p style="color: #808080; padding: 20px; text-align: center;">Unable to load blog posts. Please try again later.</p>';
-            });
-
+        BlogFeed.render('blog-feed', {
+            apiKey: 'AIzaSyCFMsYfHMYUodRRKU5SN9es8wlWXu2g7kY',
+            blogId: '818162747964194013',
+            maxResults: 10
+        });
     </script>
 </body>
 
