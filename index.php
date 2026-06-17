@@ -115,7 +115,7 @@
                             </li>
                         </ul>
 
-                        <p>Illustrations by <a href="http://dribbble.com/isaac317/click">Isaac
+                        <p>Illustrations by <a href="https://dribbble.com/isaac317/click">Isaac
                                 Montemayor</a></p>
                     </div><span class="bl-icon bl-icon-close"></span>
                 </section>
