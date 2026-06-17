@@ -290,7 +290,11 @@
     <script src="libs/armin/armin.min.js"></script>
     <script>
         $(function() {
-            Boxlayout.init();
+            try {
+                Boxlayout.init();
+            } catch (e) {
+                console.error('Boxlayout initialization failed:', e);
+            }
         });
     </script>
 </body>
