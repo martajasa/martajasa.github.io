@@ -20,6 +20,47 @@
     <link rel="stylesheet" href="libs/armin/armin.min.css">
     <link rel="stylesheet" href="libs/fonts/foundation-icons/foundation-icons.css">
     <title>Hello, Armin!</title>
+
+    <style>
+    /* Posisi center-center untuk semua ukuran layar */
+    .bl-main > section > .bl-box {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 15px !important;
+    }
+
+    /* Ukuran default huruf A, R, M, I, N */
+    .bl-main > section > .bl-box h1.armin-letter {
+        margin: 0 !important;
+        padding: 0 !important;
+        position: static !important;
+        transform: none !important;
+        font-size: 4.5rem !important;
+        line-height: 1.2 !important;
+        transition: all 0.25s ease-in-out;
+    }
+
+    /* Ukuran sedang saat di-hover (menampilkan "About me", "Technicals", dll.) */
+    .bl-main > section > .bl-box h1.armin-letter.is-hovered {
+        font-size: 1.6rem !important;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* Penyesuaian khusus layar kecil (HP / Tablet) */
+    @media screen and (max-width: 768px) {
+        .bl-main > section > .bl-box h1.armin-letter {
+            font-size: 3.5rem !important;
+        }
+
+        .bl-main > section > .bl-box h1.armin-letter.is-hovered {
+            font-size: 1.25rem !important;
+        }
+    }
+</style>
+
 </head>
 
 <body>
@@ -203,10 +244,47 @@
                                 <strong>📍 Location:</strong> Singkawang, Indonesia 79115<br>
                                 <strong>📧 Email:</strong> <a
                                     href="mailto:martajasa@gmail.com">martajasa@gmail.com</a><br>
-                                <strong>💼 LinkedIn:</strong> <a href="https://www.linkedin.com/in/martajasa"
+                                <strong>💼 LinkedIn:</strong> <a href="https://www.linkedin.com/in/martajasa" rel="noopener noreferrer"
                                     target="_blank">www.linkedin.com/in/martajasa</a>
                             </p>
                         </article>
+
+                        <article>
+    <h3>Send a Message</h3>
+    <form id="armin-contact-form" style="max-width: 500px; margin-top: 15px;">
+        <!-- Ganti VALUE dengan Access Key dari email Anda -->
+        <input type="hidden" name="access_key" value="bcf86655-4390-4d0e-87a6-39e6463ad66c">
+        <input type="hidden" name="subject" value="Pesan Baru dari Web Profil martajasa.github.io">
+        <!-- Honeypot anti-spam -->
+        <input type="checkbox" name="botcheck" style="display: none;">
+
+        <div style="margin-bottom: 12px;">
+            <label for="name" style="display: block; margin-bottom: 5px; font-weight: 600;">Nama</label>
+            <input type="text" id="name" name="name" required placeholder="Nama Anda"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; color: #333; background: #fff;">
+        </div>
+
+        <div style="margin-bottom: 12px;">
+            <label for="email" style="display: block; margin-bottom: 5px; font-weight: 600;">Email</label>
+            <input type="email" id="email" name="email" required placeholder="email@contoh.com"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; color: #333; background: #fff;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="message" style="display: block; margin-bottom: 5px; font-weight: 600;">Pesan</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Tulis pesan atau tawaran kerja sama..."
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; color: #333; background: #fff;"></textarea>
+        </div>
+
+        <button type="submit" id="contact-submit-btn"
+            style="padding: 10px 20px; background-color: #222; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+            Kirim Pesan
+        </button>
+
+        <p id="contact-form-status" style="margin-top: 12px; font-size: 0.95rem; font-weight: 500;"></p>
+    </form>
+</article>
+
 
                         <article>
                             <h3>Let's Collaborate</h3>
@@ -329,9 +407,8 @@
             </div>
         </div>
     </div><!-- /container -->
-
     <!-- Optional JavaScript; choose one of the two! -->
-    <script src="libs/armin//jquery.min.js"></script>
+    <script src="libs/armin/jquery.min.js"></script>
     <script src="libs/armin/armin.min.js"></script>
     <script>
         $(function () {
@@ -339,11 +416,14 @@
         });
     </script>
     <script>
-
         const apiKey = 'AIzaSyCFzW7tEaUS2xVUPyZtRclS29mEMsPudE4';
         const blogId = '818162747964194013';
+
         fetch(`https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}&maxResults=10`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
             .then(data => {
                 const feedContainer = document.getElementById('blog-feed');
                 feedContainer.style.display = 'grid';
@@ -352,7 +432,7 @@
                 feedContainer.style.marginTop = '20px';
 
                 if (data.items && data.items.length > 0) {
-                    data.items.forEach((item, index) => {
+                    data.items.forEach((item) => {
                         const title = item.title;
                         const link = item.url;
 
@@ -383,6 +463,11 @@
                         articleCard.style.border = '1px solid #eeeeee';
                         articleCard.style.padding = '0px';
 
+                        // Membuka artikel saat bagian mana pun dari kartu diklik
+                        articleCard.onclick = function () {
+                            window.open(link, '_blank', 'noopener,noreferrer');
+                        };
+
                         articleCard.onmouseover = function () {
                             this.style.backgroundColor = '#fafafa';
                             this.style.transform = 'translateY(-5px)';
@@ -400,15 +485,15 @@
                         // Add thumbnail if available
                         if (thumbnail) {
                             cardHTML += `<div style="width: 100%; height: 180px; overflow: hidden; background: #f8f8f8;">
-                                <img src="${thumbnail}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                                <img src="${thumbnail}" alt="${title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
                             </div>`;
                         }
 
                         cardHTML += `
                             <div style="padding: 15px;">
-                                <h4 style="margin: 0 0 10px 0; color: #808080; font-size: 1.1em; font-weight: 600; line-height: 1.4;">${title}</h4>
-                                <p style="margin: 0 0 12px 0; color: #808080; font-size: 0.95em; line-height: 1.5;">${description}</p>
-                                <a href="${link}" target="_blank" style="display: inline-block; color: #808080; text-decoration: none; font-size: 0.85em; font-weight: 600; padding-top: 5px;">Read Article →</a>
+                                <h4 style="margin: 0 0 10px 0; color: #333333; font-size: 1.1em; font-weight: 600; line-height: 1.4;">${title}</h4>
+                                <p style="margin: 0 0 12px 0; color: #666666; font-size: 0.95em; line-height: 1.5;">${description}</p>
+                                <a href="${link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="display: inline-block; color: #555555; text-decoration: none; font-size: 0.85em; font-weight: 600; padding-top: 5px;">Read Article →</a>
                             </div>
                         `;
 
@@ -423,8 +508,86 @@
                 console.error('Error fetching blog:', error);
                 document.getElementById('blog-feed').innerHTML = '<p style="color: #808080; padding: 20px; text-align: center;">Unable to load blog posts. Please try again later.</p>';
             });
-
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('#bl-main > section');
+
+        sections.forEach(section => {
+            const box = section.querySelector('.bl-box');
+            const heading = box ? box.querySelector('h1') : null;
+            const contentTitle = section.querySelector('.bl-content h2');
+
+            if (box && heading && contentTitle) {
+                const originalLetter = heading.textContent.trim();
+                const fullTitle = contentTitle.textContent.trim();
+
+                // Tambahkan class agar bisa diatur ukurannya lewat CSS
+                heading.classList.add('armin-letter');
+
+                box.addEventListener('mouseenter', function () {
+                    heading.textContent = fullTitle;
+                    heading.classList.add('is-hovered');
+                });
+
+                box.addEventListener('mouseleave', function () {
+                    heading.textContent = originalLetter;
+                    heading.classList.remove('is-hovered');
+                });
+            }
+        });
+    });
+</script>
+<script>
+    const contactForm = document.getElementById('armin-contact-form');
+    const formStatus = document.getElementById('contact-form-status');
+    const submitBtn = document.getElementById('contact-submit-btn');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Mengirim...';
+            formStatus.style.color = '#666';
+            formStatus.textContent = 'Sedang mengirim pesan Anda...';
+
+            fetch('https://web3forms.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let result = await response.json();
+                if (response.status === 200) {
+                    formStatus.style.color = '#16a34a';
+                    formStatus.textContent = 'Terima kasih! Pesan Anda berhasil terkirim ke Armin.';
+                    contactForm.reset();
+                } else {
+                    formStatus.style.color = '#dc2626';
+                    formStatus.textContent = result.message || 'Gagal mengirim pesan. Silakan coba lagi.';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                formStatus.style.color = '#dc2626';
+                formStatus.textContent = 'Terjadi kesalahan jaringan. Periksa koneksi Anda.';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Kirim Pesan';
+            });
+        });
+    }
+</script>
+
 </body>
 
 </html>
