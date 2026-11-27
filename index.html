@@ -184,14 +184,6 @@
                         <p>Explore a selection of digital products and projects I've created, ranging from responsive
                             web applications to innovative digital solutions. Each project showcases my commitment to
                             professional design, optimal user experience, and technical excellence.</p>
-                        
-                        <!-- Wadah Proyek GitHub -->
-    <h3 style="margin-top: 25px;">Open-Source & Code Repositories</h3>
-    <div id="github-repos-feed"></div>
-
-    <!-- Wadah Video YouTube -->
-    <h3 style="margin-top: 35px;">Videography</h3>
-    <div id="youtube-videos-feed"></div>
 
                         <ul id="bl-work-items">
                             <li data-panel="panel-1">
@@ -229,6 +221,16 @@
 
                         <p>Illustrations by <a href="http://dribbble.com/isaac317/click">Isaac
                                 Montemayor</a></p>
+
+                        
+                        <!-- Wadah Proyek GitHub -->
+    <h3 style="margin-top: 25px;">Open-Source & Code Repositories</h3>
+    <div id="github-repos-feed"></div>
+
+    <!-- Wadah Video YouTube -->
+    <h3 style="margin-top: 35px;">Videography</h3>
+    <div id="youtube-videos-feed"></div>
+                        
                     </div><span class="bl-icon bl-icon-close"></span>
                 </section>
 
@@ -677,9 +679,9 @@
     // 2. INTEGRASI YOUTUBE DATA API V3
     // ==========================================
     // Menggunakan variabel apiKey yang sudah Anda deklarasikan di atas
-    const youtubeChannelId = 'UCjvV-MH5g7rl8g7471zxlFw'; // Diawali huruf UC...
+    const youtubeChannelId = 'UCXZiAIfBrepRoooqL9Fwv6A'; // Diawali huruf UC...
 
-    if (youtubeChannelId !== 'UCjvV-MH5g7rl8g7471zxlFw') {
+    if (youtubeChannelId !== 'UCXZiAIfBrepRoooqL9Fwv6A') {
         fetch(`https://googleapis.com{apiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=6&type=video`)
             .then(response => {
                 if (!response.ok) throw new Error('Gagal memuat video YouTube');
