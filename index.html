@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="bl-content">
-                        <h2>About me</h2>
+                        <h2>About</h2>
                         <p class="lead">Seniman Teknologi Informasi</p>
                         <p>I'm a passionate Full-Stack Web Developer and AI enthusiast specializing in creating
                             innovative digital products that solve real-world problems. With a strong background in web
@@ -179,11 +179,19 @@
                     </div>
 
                     <div class="bl-content">
-                        <h2>My Works</h2>
+                        <h2>Works</h2>
 
                         <p>Explore a selection of digital products and projects I've created, ranging from responsive
                             web applications to innovative digital solutions. Each project showcases my commitment to
                             professional design, optimal user experience, and technical excellence.</p>
+                        
+                        <!-- Wadah Proyek GitHub -->
+    <h3 style="margin-top: 25px;">Open-Source & Code Repositories</h3>
+    <div id="github-repos-feed"></div>
+
+    <!-- Wadah Video YouTube -->
+    <h3 style="margin-top: 35px;">Videography</h3>
+    <div id="youtube-videos-feed"></div>
 
                         <ul id="bl-work-items">
                             <li data-panel="panel-1">
@@ -230,7 +238,7 @@
                     </div>
 
                     <div class="bl-content">
-                        <h2>My Social</h2>
+                        <h2>Social</h2>
 
                         <article>
                             <h3>Let's Connect</h3>
@@ -587,6 +595,153 @@
         });
     }
 </script>
+<script>
+    // ==========================================
+    // 1. INTEGRASI GITHUB REPOSITORIES (TANPA KEY)
+    // ==========================================
+    const githubUsername = 'martajasa';
+    
+    fetch(`https://github.com{githubUsername}/repos?sort=updated&per_page=6`)
+        .then(response => {
+            if (!response.ok) throw new Error('Gagal memuat repositori GitHub');
+            return response.json();
+        })
+        .then(repos => {
+            const repoContainer = document.getElementById('github-repos-feed');
+            if (!repoContainer) return;
+
+            repoContainer.style.display = 'grid';
+            repoContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+            repoContainer.style.gap = '20px';
+            repoContainer.style.marginTop = '15px';
+
+            // Filter agar tidak menampilkan repo website profil itu sendiri (opsional)
+            const filteredRepos = repos.filter(repo => !repo.fork && repo.name !== `${githubUsername}.github.io`);
+
+            if (filteredRepos.length === 0) {
+                repoContainer.innerHTML = '<p style="color: #808080;">Belum ada repositori publik lainnya.</p>';
+                return;
+            }
+
+            filteredRepos.forEach(repo => {
+                const card = document.createElement('article');
+                card.style.backgroundColor = '#ffffff';
+                card.style.borderRadius = '8px';
+                card.style.padding = '16px';
+                card.style.border = '1px solid #eeeeee';
+                card.style.cursor = 'pointer';
+                card.style.transition = 'all 0.3s ease';
+                card.style.display = 'flex';
+                card.style.flexDirection = 'column';
+                card.style.justifyContent = 'space-between';
+
+                card.onclick = () => window.open(repo.html_url, '_blank', 'noopener,noreferrer');
+                card.onmouseover = function () {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.08)';
+                };
+                card.onmouseout = function () {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                };
+
+                const langBadge = repo.language 
+                    ? `<span style="font-size: 0.75em; background: #f3f4f6; color: #374151; padding: 3px 8px; border-radius: 12px; font-weight: 600;">${repo.language}</span>` 
+                    : '';
+
+                card.innerHTML = `
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h4 style="margin: 0; color: #333333; font-size: 1.05em; font-weight: 600;">${repo.name}</h4>
+                            ${langBadge}
+                        </div>
+                        <p style="margin: 0 0 15px 0; color: #666666; font-size: 0.9em; line-height: 1.5;">
+                            ${repo.description || 'Tidak ada deskripsi proyek.'}
+                        </p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85em; color: #555555; border-top: 1px solid #f0f0f0; padding-top: 10px;">
+                        <span>★ ${repo.stargazers_count} Stars</span>
+                        <span style="font-weight: 600;">Lihat Kode →</span>
+                    </div>
+                `;
+                repoContainer.appendChild(card);
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            const repoContainer = document.getElementById('github-repos-feed');
+            if (repoContainer) repoContainer.innerHTML = '<p style="color: #808080;">Gagal memuat proyek GitHub.</p>';
+        });
+
+    // ==========================================
+    // 2. INTEGRASI YOUTUBE DATA API V3
+    // ==========================================
+    // Menggunakan variabel apiKey yang sudah Anda deklarasikan di atas
+    const youtubeChannelId = 'UCjvV-MH5g7rl8g7471zxlFw'; // Diawali huruf UC...
+
+    if (youtubeChannelId !== 'UCjvV-MH5g7rl8g7471zxlFw') {
+        fetch(`https://googleapis.com{apiKey}&channelId=${youtubeChannelId}&part=snippet,id&order=date&maxResults=6&type=video`)
+            .then(response => {
+                if (!response.ok) throw new Error('Gagal memuat video YouTube');
+                return response.json();
+            })
+            .then(data => {
+                const ytContainer = document.getElementById('youtube-videos-feed');
+                if (!ytContainer) return;
+
+                ytContainer.style.display = 'grid';
+                ytContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+                ytContainer.style.gap = '20px';
+                ytContainer.style.marginTop = '15px';
+
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const videoId = item.id.videoId;
+                        const title = item.snippet.title;
+                        const thumb = item.snippet.thumbnails.medium.url;
+                        const videoUrl = `https://youtube.com{videoId}`;
+
+                        const card = document.createElement('article');
+                        card.style.backgroundColor = '#ffffff';
+                        card.style.borderRadius = '8px';
+                        card.style.overflow = 'hidden';
+                        card.style.border = '1px solid #eeeeee';
+                        card.style.cursor = 'pointer';
+                        card.style.transition = 'all 0.3s ease';
+
+                        card.onclick = () => window.open(videoUrl, '_blank', 'noopener,noreferrer');
+                        card.onmouseover = function () {
+                            this.style.transform = 'translateY(-4px)';
+                            this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.08)';
+                        };
+                        card.onmouseout = function () {
+                            this.style.transform = 'translateY(0)';
+                            this.style.boxShadow = 'none';
+                        };
+
+                        card.innerHTML = `
+                            <div style="width: 100%; height: 160px; overflow: hidden; background: #000;">
+                                <img src="${thumb}" alt="${title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="padding: 15px;">
+                                <h4 style="margin: 0 0 10px 0; color: #333333; font-size: 1em; font-weight: 600; line-height: 1.4;">${title}</h4>
+                                <span style="font-size: 0.85em; font-weight: 600; color: #dc2626;">▶ Tonton di YouTube</span>
+                            </div>
+                        `;
+                        ytContainer.appendChild(card);
+                    });
+                } else {
+                    ytContainer.innerHTML = '<p style="color: #808080;">Belum ada video yang ditemukan.</p>';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                const ytContainer = document.getElementById('youtube-videos-feed');
+                if (ytContainer) ytContainer.innerHTML = '<p style="color: #808080;">Gagal memuat video YouTube. Pastikan YouTube Data API v3 sudah aktif.</p>';
+            });
+    }
+</script>
+
 
 </body>
 
